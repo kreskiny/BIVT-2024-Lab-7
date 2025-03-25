@@ -8,7 +8,7 @@ namespace Lab_7
 {
     public class Blue_4
     {
-        abstract class Team
+        public abstract class Team
         {
             // поля
             private string name;
@@ -84,10 +84,10 @@ namespace Lab_7
             public Group(string name)
             {
                 this.name = name;
-                this.manTeams = new Team[12];
-                this.womanTeams = new Team[12];
-                this.manIndex = 0;
-                this.womanIndex = 0;
+                manTeams = new Team[12];
+                womanTeams = new Team[12];
+                manIndex = 0;
+                womanIndex = 0;
             }
 
             // Методы
@@ -201,13 +201,13 @@ namespace Lab_7
             }
         }
 
-        abstract class ManTeam : Team
+        public class ManTeam : Team
         {
             public ManTeam(string name) : base(name) { }
 
         }
 
-        abstract class WomanTeam : Team
+        public class WomanTeam : Team
         {
             public WomanTeam(string name) : base(name) { }
 

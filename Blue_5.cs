@@ -26,8 +26,8 @@ namespace Lab_7
             {
                 this.name = name;
                 this.surname = surname;
-                this.place = 0;
-                this.is_setted = false;
+                place = 0;
+                is_setted = false;
             }
 
             // Методы
@@ -50,7 +50,7 @@ namespace Lab_7
             }
         }
 
-        abstract class Team
+        public abstract class Team
         {
             // поля
             private string name;
@@ -142,12 +142,12 @@ namespace Lab_7
                 Console.WriteLine();
             }
         }
-        abstract class ManTeam : Team
+        public class ManTeam : Team
         {
             public ManTeam(string name) : base(name) { }
         }
 
-        abstract class WomanTeam : Team
+        public class WomanTeam : Team
         {
             public WomanTeam(string name) : base(name) { }
         }
