@@ -132,25 +132,120 @@ namespace Lab_7
                 }
             }
 
+            public static void Sort(Team[] teams)
+            {
+                if (teams == null) return;
+                for (int i = 0; i < teams.Length - 1; i++)
+                {
+                    for (int j = i + 1; j < teams.Length; j++)
+                    {
+                        if (teams[i].SummaryScore < teams[j].SummaryScore ||
+                            (teams[i].SummaryScore == teams[j].SummaryScore && teams[i].TopPlace > teams[j].TopPlace))
+                        {
+                            Team temp = teams[i];
+                            teams[i] = teams[j];
+                            teams[j] = temp;
+                        }
+                    }
+                }
+            }
+
             public void Print()
             {
                 Console.WriteLine($"{Name}");
                 foreach (var sportsman in sportsmen)
                 {
-                    sportsman.Print();
+                    sportsman?.Print();
                 }
                 Console.WriteLine();
             }
+
+            protected abstract double GetTeamStrength();
+
+            public static Team[] GetChampion(Team[] teams)
+            {
+                if (teams == null || teams.Length == 0)
+                    return null;
+
+                Team maleChampion = null;
+                Team femaleChampion = null;
+                double maxMaleStrength = double.MinValue;
+                double maxFemaleStrength = double.MinValue;
+
+                foreach (var team in teams)
+                {
+                    if (team == null) continue;
+
+                    double strength = team.GetTeamStrength();
+
+                    if (team is ManTeam)
+                    {
+                        if (strength > maxMaleStrength)
+                        {
+                            maxMaleStrength = strength;
+                            maleChampion = team;
+                        }
+                    }
+                    else if (team is WomanTeam)
+                    {
+                        if (strength > maxFemaleStrength)
+                        {
+                            maxFemaleStrength = strength;
+                            femaleChampion = team;
+                        }
+                    }
+                }
+
+                return new Team[] { maleChampion, femaleChampion };
+            }
         }
+
         public class ManTeam : Team
         {
             public ManTeam(string name) : base(name) { }
+
+            protected override double GetTeamStrength()
+            {
+                int validCount = 0;
+                double sum = 0;
+
+                foreach (var sportsman in Sportsmen)
+                {
+                    if (sportsman != null && sportsman.Place != 0)
+                    {
+                        sum += sportsman.Place;
+                        validCount++;
+                    }
+                }
+
+                if (validCount == 0) return 0;
+                return 100 / (sum / validCount);
+            }
         }
 
         public class WomanTeam : Team
         {
             public WomanTeam(string name) : base(name) { }
-        }
 
+            protected override double GetTeamStrength()
+            {
+                int validCount = 0;
+                double sum = 0;
+                double product = 1;
+
+                foreach (var sportsman in Sportsmen)
+                {
+                    if (sportsman != null && sportsman.Place != 0)
+                    {
+                        sum += sportsman.Place;
+                        product *= sportsman.Place;
+                        validCount++;
+                    }
+                }
+
+                if (validCount == 0 || product == 0) return 0;
+                return 100 * sum * validCount / product;
+            }
+        }
     }
 }

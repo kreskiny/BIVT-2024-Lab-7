@@ -17,11 +17,11 @@ namespace Lab_7
             private int participantCount;
 
             // Конструктор 
-            protected WaterJump(string name, int bank, int numberOfParticipants)
+            protected WaterJump(string name, int bank)
             {
                 name = name;
                 bank = bank;
-                participants = new Participant[numberOfParticipants];
+                participants = new Participant[participantCount];
                 participantCount = 0; // Счетчик участников
             }
 
