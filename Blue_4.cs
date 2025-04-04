@@ -31,7 +31,7 @@ namespace Lab_7
             {
                 get
                 {
-                    if (scores == null) return 0; // Проверка на инициализацию
+                    if (scores == null) return 0; 
                     int total = 0;
                     foreach (int score in scores)
                     {
@@ -51,7 +51,7 @@ namespace Lab_7
             // Методы
             public void PlayMatch(int result)
             {
-                if(scores == null) return; // Проверка на инициализацию
+                if(scores == null) return; 
                 Array.Resize(ref scores, scores.Length + 1);
                 scores[scores.Length - 1] = result;
             }
@@ -93,7 +93,7 @@ namespace Lab_7
             // Методы
             public void Add(Team team)
             {
-                if (team == null) return; // Проверка на инициализацию
+                if (team == null) return;
 
                 if (team is ManTeam && manIndex < manTeams.Length)
                 {

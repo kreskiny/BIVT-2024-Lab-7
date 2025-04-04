@@ -45,7 +45,18 @@ namespace Lab_7
                 }
             }
 
-            public virtual bool IsExpelled => is_expelled;
+            public virtual bool IsExpelled 
+            {
+                get 
+                {
+                    if (penalties == null || penalties.Length == 0) return false;
+                    for (int i = 0; i < penalties.Length; i++)
+                    {
+                        if (penalties[i] == 10) return true;
+                    }
+                    return false;
+                }
+            }
             
 
             // Конструктор
@@ -111,13 +122,12 @@ namespace Lab_7
 
             public override void PlayMatch(int time)
             {
-                base.PlayMatch(time); // Вызов метода базового класса для записи штрафов
-                matchCount++; // Увеличиваем количество сыгранных матчей
+                base.PlayMatch(time); 
+                matchCount++;
 
-                // Предположим, что если время штрафа равно 5, это означает 5 фолов
                 if (time == 5)
                 {
-                    foulCount++; // Увеличиваем количество фолов
+                    foulCount++; 
                 }
             }
 
@@ -147,7 +157,28 @@ namespace Lab_7
                 }
             }
 
-            public override bool IsExpelled => is_expelled;
+            public override bool IsExpelled 
+            {
+                get
+                {
+                    if (penalties == null) return false;
+                    int sm = 0;
+
+                    for (int i = 0; i < penalties.Length; i++)
+                    {
+                        sm += penalties[i];
+                        if (penalties[i] >= 10) 
+                        { 
+                            is_expelled = true; 
+                            return true; 
+                        }
+                    }
+                    if (sm > 0.1 * totalPenaltyTime / matchCount) return true;
+
+                    return false;
+                }
+            
+            }
         }
     }
 }

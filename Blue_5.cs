@@ -69,7 +69,7 @@ namespace Lab_7
                     int total = 0;
                     foreach (var sportsman in sportsmen)
                     {
-                        if (sportsman != null) // Проверка на null
+                        if (sportsman != null) 
                         {
                             switch (sportsman.Place)
                             {
@@ -91,7 +91,7 @@ namespace Lab_7
                 get
                 {
                     if (sportsmen == null) return 0;
-                    int top = int.MaxValue; // Изменено на MaxValue для правильной инициализации
+                    int top = int.MaxValue;
                     foreach (var sportsman in sportsmen)
                     {
                         if (sportsman != null && sportsman.Place < top && sportsman.Place != 0)
@@ -99,7 +99,7 @@ namespace Lab_7
                             top = sportsman.Place;
                         }
                     }
-                    return top == int.MaxValue ? 0 : top; // Если нет установленного места, вернуть 0
+                    return top == int.MaxValue ? 0 : top; 
                 }
             }
 
@@ -107,8 +107,8 @@ namespace Lab_7
             public Team(string name)
             {
                 this.name = name;
-                this.sportsmen = new Sportsman[6];
-                this.count = 0;
+                sportsmen = new Sportsman[6];
+                count = 0;
             }
 
             // Метод добавления спортсмена
@@ -124,7 +124,7 @@ namespace Lab_7
                 }
             }
 
-            public void Add(params Sportsman[] newSportsmen)
+            public void Add(Sportsman[] newSportsmen)
             {
                 foreach (var sportsman in newSportsmen)
                 {

@@ -14,15 +14,13 @@ namespace Lab_7
             private string name;
             private int bank;
             private Participant[] participants;
-            private int participantCount;
 
             // Конструктор 
             protected WaterJump(string name, int bank)
             {
                 name = name;
                 bank = bank;
-                participants = new Participant[participantCount];
-                participantCount = 0; // Счетчик участников
+                participants = new Participant[0];
             }
 
             // Свойства
@@ -35,30 +33,31 @@ namespace Lab_7
                 get { return participants; }
             }
 
-            public int ParticipantCount => participantCount;
             public abstract double[] Prize { get; }
 
 
 
             public void Add(Participant participant)
             {
-                if (participantCount < participants.Length)
+                if (participants==null)
                 {
-                    participants[participantCount] = participant;
-                    participantCount++;
+                    return;
                 }
-                else
+                Participant[] newPart = new Participant[participants.Length + 1];
+                for (int i = 0; i < participants.Length; i++)
                 {
-                    Console.WriteLine("достигнут лимит участников");
+                    newPart[i] = participants[i];
                 }
+                newPart[participants.Length] = participant;
+                participants = newPart;
             }
 
             // Метод для добавления нескольких участников
-            public void Add(params Participant[] newParticipants)
+            public void Add(Participant[] newParticipants)
             {
                 foreach (var participant in newParticipants)
                 {
-                    Add(participant); // Используем метод для добавления одного участника
+                    Add(participant); 
                 }
             }
         }
@@ -77,7 +76,7 @@ namespace Lab_7
                 get
                 {
                     if (marks == null || marks.Length == 0) return null;
-                    int[,] copyArray = new int[marks.GetLength(0), marks.GetLength(1)];
+                    int[,] copyArray = new int[2, 5];
                     Array.Copy(marks, copyArray, marks.Length);
                     return copyArray;
                 }
@@ -86,12 +85,12 @@ namespace Lab_7
             {
                 get
                 {
-                    if (marks == null || marks.Length == 0) return 0; // Проверка на инициализацию
+                    if (marks == null || marks.Length == 0) return 0; 
 
                     int total = 0;
-                    for (int i = 0; i < marks.GetLength(0); i++)
+                    for (int i = 0; i <2; i++)
                     {
-                        for (int j = 0; j < marks.GetLength(1); j++)
+                        for (int j = 0; j < 5; j++)
                         {
                             total += marks[i, j];
                         }
@@ -130,10 +129,10 @@ namespace Lab_7
                 {
                     return;
                 }
-                for (int i = 0; i < marks.GetLength(0); i++)
+                for (int i = 0; i < 2; i++)
                 {
                     bool isEmpty = true;
-                    for (int j = 0; j < marks.GetLength(1); j++)
+                    for (int j = 0; j < 5; j++)
                     {
                         if (marks[i, j] != 0)
                         {
@@ -182,8 +181,8 @@ namespace Lab_7
         public class WaterJump3m : WaterJump
         {
             // Конструктор
-            public WaterJump3m(string name, int bank, int numberOfParticipants)
-                : base(name, bank, numberOfParticipants)
+            public WaterJump3m(string name, int bank)
+                : base(name, bank)
             {
             }
 
@@ -193,9 +192,9 @@ namespace Lab_7
                 get
                 {
                     // Если участников меньше 3-х, возвращаем пустой массив
-                    if (ParticipantCount < 3)
+                    if (Participants.Count() < 3 || Participants == null)
                     {
-                        return new double[0];
+                        return null;
                     }
 
                     double firstPlacePrize = Bank * 0.5;
@@ -209,16 +208,16 @@ namespace Lab_7
 
         public class WaterJump5m : WaterJump
         {
-            public WaterJump5m(string name, int bank, int numberOfParticipants) :
-                base(name, bank, numberOfParticipants)
+            public WaterJump5m(string name, int bank) :
+                base(name, bank)
             { }
             public override double[] Prize
             {
                 get
                 {
-                    if (ParticipantCount < 3)
+                    if (Participants.Count() < 3 || Participants == null)
                     {
-                        return new double[0];
+                        return null;
                     }
                     Participant.Sort(Participants);
                     int topParc = Participants.Length / 2;

@@ -77,7 +77,6 @@ namespace Lab_7
                 return votes;
             }
 
-            // Переопределяем метод Print для вывода имени и фамилии
             public void Print()
             {
                 Console.WriteLine($"{Name} {Surname} {Votes}");
