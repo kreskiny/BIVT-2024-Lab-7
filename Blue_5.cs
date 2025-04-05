@@ -162,7 +162,7 @@ namespace Lab_7
 
             protected abstract double GetTeamStrength();
 
-            public static Team[] GetChampion(Team[] teams)
+            public static Team GetChampion(Team[] teams)
             {
                 if (teams == null || teams.Length == 0)
                     return null;
@@ -174,7 +174,7 @@ namespace Lab_7
 
                 foreach (var team in teams)
                 {
-                    if (team == null) continue;
+                    if (team == null) return null;
 
                     double strength = team.GetTeamStrength();
 
@@ -195,8 +195,11 @@ namespace Lab_7
                         }
                     }
                 }
+                Console.WriteLine(maleChampion);
+                Console.WriteLine(femaleChampion);
 
-                return new Team[] { maleChampion, femaleChampion };
+                if (maxFemaleStrength > maxMaleStrength) return femaleChampion;
+                else return maleChampion;
             }
         }
 
