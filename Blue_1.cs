@@ -19,7 +19,7 @@ namespace Lab_7
             // Конструктор
             public Response(string name)
             {
-                name = name;
+                this.name = name;
                 votes = 0; 
             }
 
@@ -30,13 +30,13 @@ namespace Lab_7
                 int count = 0;
                 foreach (var response in responses)
                 {
-                    if (response.Name == Name)
+                    if (response.Name == name)
                     {
                         count++;
                     }
                 }
                 votes = count;
-                return votes;
+                return count;
             }
 
             public void Print()
@@ -52,7 +52,7 @@ namespace Lab_7
             // Конструктор, принимающий имя и фамилию
             public HumanResponse(string name, string surname) : base(name)
             {
-                surname = surname; 
+                this.surname = surname; 
             }
             public override int CountVotes(Response[] responses)
             {

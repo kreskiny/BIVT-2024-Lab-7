@@ -28,10 +28,8 @@ namespace Lab_7
 
             public int Bank => bank;
 
-            public Participant[] Participants
-            {
-                get { return participants; }
-            }
+            public Participant[] Participants => participants;
+            
 
             public abstract double[] Prize { get; }
 
@@ -39,10 +37,7 @@ namespace Lab_7
 
             public void Add(Participant participant)
             {
-                if (participants==null)
-                {
-                    return;
-                }
+                if (participants == null|| participants.Length==0) return;
                 Participant[] newPart = new Participant[participants.Length + 1];
                 for (int i = 0; i < participants.Length; i++)
                 {
@@ -55,7 +50,7 @@ namespace Lab_7
             // Метод для добавления нескольких участников
             public void Add(Participant[] newParticipants)
             {
-                if (newParticipants == null) return;
+                if (newParticipants == null || newParticipants.Length==0 || participants==null||participants.Length==0) return;
                 foreach (var participant in newParticipants)
                 {
                     Add(participant); 
@@ -105,7 +100,7 @@ namespace Lab_7
             {
                 this.name = name;
                 this.surname = surname;
-                this.marks = new int[2, 5];
+                marks = new int[2, 5];
             }
 
             // Методы
@@ -194,7 +189,7 @@ namespace Lab_7
                 {
                     if (Participants == null) return null;
                     // Если участников меньше 3-х, возвращаем пустой массив
-                    if (Participants.Count() < 3) return null;
+                    if (Participants.Length < 3) return null;
 
                     double firstPlacePrize = Bank * 0.5;
                     double secondPlacePrize = Bank * 0.3;

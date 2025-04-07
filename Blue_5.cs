@@ -116,7 +116,7 @@ namespace Lab_7
             public void Add(Sportsman sportsman)
             {
                 if (sportsmen == null || sportsman == null) return;
-                if (count < sportsmen.Length)
+                if (count < 6)
                 {
                     sportsmen[count++] = sportsman;
                 }
@@ -131,6 +131,7 @@ namespace Lab_7
                 if (sportsmen == null || newSportsmen == null) return;
                 foreach (var sportsman in newSportsmen)
                 {
+
                     Add(sportsman);
                 }
             }

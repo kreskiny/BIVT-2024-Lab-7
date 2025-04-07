@@ -62,8 +62,8 @@ namespace Lab_7
             // Конструктор
             public Participant(string name, string surname)
             {
-                name = name;
-                surname = surname;
+                this.name = name;
+                this.surname = surname;
                 penalties = new int[0]; 
                 is_expelled = false;
             }
@@ -123,6 +123,7 @@ namespace Lab_7
 
             public override void PlayMatch(int falls)
             {
+                if (penalties == null) return;
                 int[] newPart = new int[penalties.Length + 1];
                 for (int i = 0; i < penalties.Length; i++)
                 {
@@ -136,6 +137,7 @@ namespace Lab_7
             {
                 get
                 {
+                    if (penalties == null) return false;
                     int count_5 = 0;
                     int count = 0;
                     foreach (int fall in penalties)
@@ -167,6 +169,7 @@ namespace Lab_7
 
             public override void PlayMatch(int falls)
             {
+                if (penalties==null) return;
                 int[] newPart = new int[penalties.Length + 1];
                 for (int i = 0; i < penalties.Length; i++)
                 {
