@@ -55,6 +55,7 @@ namespace Lab_7
             // Метод для добавления нескольких участников
             public void Add(Participant[] newParticipants)
             {
+                if (newParticipants == null) return;
                 foreach (var participant in newParticipants)
                 {
                     Add(participant); 
@@ -157,7 +158,7 @@ namespace Lab_7
 
             public static void Sort(Participant[] array)
             {
-                if (array == null) return;
+                if (array == null || array.Length==0) return;
                 for (int i = 0; i < array.Length - 1; i++)
                 {
                     for (int j = 0; j < array.Length - i - 1; j++)
@@ -191,11 +192,9 @@ namespace Lab_7
             {
                 get
                 {
+                    if (Participants == null) return null;
                     // Если участников меньше 3-х, возвращаем пустой массив
-                    if (Participants.Count() < 3 || Participants == null)
-                    {
-                        return null;
-                    }
+                    if (Participants.Count() < 3) return null;
 
                     double firstPlacePrize = Bank * 0.5;
                     double secondPlacePrize = Bank * 0.3;
@@ -215,10 +214,8 @@ namespace Lab_7
             {
                 get
                 {
-                    if (Participants.Count() < 3 || Participants == null)
-                    {
-                        return null;
-                    }
+                    if (Participants == null) return null;
+                    if (Participants.Count() < 3) return null;
                     Participant.Sort(Participants);
                     int topParc = Participants.Length / 2;
                     double[] prizes = null;

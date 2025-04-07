@@ -24,7 +24,7 @@ namespace Lab_7
             {
                 get
                 {
-                    if (penalties == null) return null;
+                    if (penalties == null || penalties.Length==0) return null;
                     int[] copyArray = new int[penalties.Length];
                     Array.Copy(penalties, copyArray, penalties.Length);
                     return copyArray;
@@ -35,7 +35,7 @@ namespace Lab_7
                 
                 get
                 {
-                    if (penalties == null) return 0;
+                    if (penalties == null || penalties.Length == 0) return 0;
                     int total = 0;
                     foreach (int time in penalties)
                     {
@@ -71,14 +71,15 @@ namespace Lab_7
             // Методы
             public virtual void PlayMatch(int time)
             {
-                if (penalties == null) return; 
+                if (time < 0) return;
+                if (penalties == null || penalties.Length == 0) return; 
                 Array.Resize(ref penalties, penalties.Length + 1);
                 penalties[penalties.Length - 1] = time;
             }
 
             public static void Sort(Participant[] array)
             {
-                if (array == null) return;
+                if (array == null || array.Length == 0) return;
                 for (int i = 0; i < array.Length - 1; i++)
                 {
                     for (int j = 0; j < array.Length-1-i; j++)
@@ -109,7 +110,7 @@ namespace Lab_7
                 Console.WriteLine();
             }
         }
-        public class BasketballPlayer: Participant
+        public class BasketballPlayer : Participant
         {
             private int matchCount;
             private int foulCount;
@@ -120,18 +121,37 @@ namespace Lab_7
                 foulCount = 0;
             }
 
-            public override void PlayMatch(int time)
+            public override void PlayMatch(int falls)
             {
-                base.PlayMatch(time); 
-                matchCount++;
-
-                if (time == 5)
+                int[] newPart = new int[penalties.Length + 1];
+                for (int i = 0; i < penalties.Length; i++)
                 {
-                    foulCount++; 
+                    newPart[i] = penalties[i];
                 }
+                newPart[penalties.Length] = falls;
+                penalties = newPart;
             }
 
-            public override bool IsExpelled=>is_expelled;
+            public override bool IsExpelled
+            {
+                get
+                {
+                    int count_5 = 0;
+                    int count = 0;
+                    foreach (int fall in penalties)
+                    {
+                        count += fall;
+                        if (fall == 5) count_5++;
+                    }
+                    if (count_5 > penalties.Length * 0.1 || count > penalties.Length * 2)
+                    {
+                        is_expelled = true;
+                        return is_expelled;
+                    }
+                    return false;
+                }
+
+            }
 
         }
         public class HockeyPlayer : Participant
@@ -145,23 +165,22 @@ namespace Lab_7
                 matchCount = 0;
             }
 
-            public override void PlayMatch(int penaltyTime)
+            public override void PlayMatch(int falls)
             {
-                matchCount++; 
-                totalPenaltyTime += penaltyTime; 
-
-                
-                if (penaltyTime >= 10)
+                int[] newPart = new int[penalties.Length + 1];
+                for (int i = 0; i < penalties.Length; i++)
                 {
-                    is_expelled = true;
+                    newPart[i] = penalties[i];
                 }
+                newPart[penalties.Length] = falls;
+                penalties = newPart;
             }
 
             public override bool IsExpelled 
             {
                 get
                 {
-                    if (penalties == null) return false;
+                    if (penalties == null || penalties.Length == 0) return false;
                     int sm = 0;
 
                     for (int i = 0; i < penalties.Length; i++)

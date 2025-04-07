@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Lab_7.Blue_5;
 
 namespace Lab_7
 {
@@ -69,7 +70,7 @@ namespace Lab_7
                     int total = 0;
                     foreach (var sportsman in sportsmen)
                     {
-                        if (sportsman != null) 
+                        if (sportsman != null)
                         {
                             switch (sportsman.Place)
                             {
@@ -99,7 +100,7 @@ namespace Lab_7
                             top = sportsman.Place;
                         }
                     }
-                    return top == int.MaxValue ? 0 : top; 
+                    return top;
                 }
             }
 
@@ -114,6 +115,7 @@ namespace Lab_7
             // Метод добавления спортсмена
             public void Add(Sportsman sportsman)
             {
+                if (sportsmen == null || sportsman == null) return;
                 if (count < sportsmen.Length)
                 {
                     sportsmen[count++] = sportsman;
@@ -126,6 +128,7 @@ namespace Lab_7
 
             public void Add(Sportsman[] newSportsmen)
             {
+                if (sportsmen == null || newSportsmen == null) return;
                 foreach (var sportsman in newSportsmen)
                 {
                     Add(sportsman);

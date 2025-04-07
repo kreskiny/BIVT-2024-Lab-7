@@ -26,6 +26,7 @@ namespace Lab_7
             // Метод для подсчета голосов
             public virtual int CountVotes(Response[] responses)
             {
+                if (responses == null || responses.Length==0) return 0;
                 int count = 0;
                 foreach (var response in responses)
                 {
@@ -56,6 +57,7 @@ namespace Lab_7
             public override int CountVotes(Response[] responses)
             {
                 int count = 0;
+                if (responses == null || responses.Length == 0) return 0;
                 foreach (var response in responses)
                 {
                     if (response is HumanResponse humanResponse)
@@ -65,16 +67,9 @@ namespace Lab_7
                             count++;
                         }
                     }
-                    else if (response.Name == Name) 
-                    {
-                        if (response.Name == Name)
-                        {
-                            count++;
-                        }
-                    }
                 }
                 votes = count;
-                return votes;
+                return count;
             }
 
             public void Print()
