@@ -24,7 +24,7 @@ namespace Lab_7
             {
                 get
                 {
-                    if (penalties == null || penalties.Length==0) return null;
+                    if (penalties == null) return null;
                     int[] copyArray = new int[penalties.Length];
                     Array.Copy(penalties, copyArray, penalties.Length);
                     return copyArray;

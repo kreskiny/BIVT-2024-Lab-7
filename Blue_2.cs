@@ -18,8 +18,8 @@ namespace Lab_7
             // Конструктор 
             protected WaterJump(string name, int bank)
             {
-                name = name;
-                bank = bank;
+                this.name = name;
+                this.bank = bank;
                 participants = new Participant[0];
             }
 
@@ -71,7 +71,7 @@ namespace Lab_7
             {
                 get
                 {
-                    if (marks == null || marks.Length == 0) return null;
+                    if (marks == null) return null;
                     int[,] copyArray = new int[2, 5];
                     Array.Copy(marks, copyArray, marks.Length);
                     return copyArray;

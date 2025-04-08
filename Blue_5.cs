@@ -92,7 +92,7 @@ namespace Lab_7
                 get
                 {
                     if (sportsmen == null) return 0;
-                    int top = int.MaxValue;
+                    int top = 18;
                     foreach (var sportsman in sportsmen)
                     {
                         if (sportsman != null && sportsman.Place < top && sportsman.Place != 0)
