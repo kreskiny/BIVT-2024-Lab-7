@@ -37,7 +37,7 @@ namespace Lab_7
 
             public void Add(Participant participant)
             {
-                if (participants == null|| participants.Length==0) return;
+                if (participants == null) return;
                 Participant[] newPart = new Participant[participants.Length + 1];
                 for (int i = 0; i < participants.Length; i++)
                 {
@@ -50,7 +50,7 @@ namespace Lab_7
             // Метод для добавления нескольких участников
             public void Add(Participant[] newParticipants)
             {
-                if (newParticipants == null || newParticipants.Length==0 || participants==null||participants.Length==0) return;
+                if (newParticipants == null || participants==null) return;
                 foreach (var participant in newParticipants)
                 {
                     Add(participant); 
