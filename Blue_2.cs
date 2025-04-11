@@ -35,22 +35,18 @@ namespace Lab_7
 
 
 
-            public void Add(Participant participant)
+            public void Add(Participant New_Part)
             {
                 if (participants == null) return;
-                Participant[] newPart = new Participant[participants.Length + 1];
-                for (int i = 0; i < participants.Length; i++)
-                {
-                    newPart[i] = participants[i];
-                }
-                newPart[participants.Length] = participant;
-                participants = newPart;
+                Array.Resize(ref participants, participants.Length + 1);
+                participants[participants.Length - 1] = New_Part;
+
             }
 
             // Метод для добавления нескольких участников
             public void Add(Participant[] newParticipants)
             {
-                if (newParticipants == null || participants==null) return;
+                if (participants==null) return;
                 foreach (var participant in newParticipants)
                 {
                     Add(participant); 
@@ -233,7 +229,7 @@ namespace Lab_7
                     prizes[0] = firstPlacePrize;
                     prizes[1] = secondPlacePrize;
                     prizes[2] = thirdPlacePrize;
-                    for (int i = 0; i < topParc; i++)
+                    for (int i = 0; i < prizes.Length-3; i++)
                     {
                         prizes[i] = othersPlacePrise;
                     }

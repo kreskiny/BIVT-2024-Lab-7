@@ -72,14 +72,14 @@ namespace Lab_7
             public virtual void PlayMatch(int time)
             {
                 if (time < 0) return;
-                if (penalties == null || penalties.Length == 0) return; 
+                if (penalties == null) return; 
                 Array.Resize(ref penalties, penalties.Length + 1);
                 penalties[penalties.Length - 1] = time;
             }
 
             public static void Sort(Participant[] array)
             {
-                if (array == null || array.Length == 0) return;
+                if (array == null) return;
                 for (int i = 0; i < array.Length - 1; i++)
                 {
                     for (int j = 0; j < array.Length-1-i; j++)
