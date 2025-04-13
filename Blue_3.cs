@@ -80,7 +80,7 @@ namespace Lab_7
             public static void Sort(Participant[] array)
             {
                 if (array == null) return;
-                for (int i = 0; i < array.Length - 1; i++)
+                for (int i = 0; i < array.Length; i++)
                 {
                     for (int j = 0; j < array.Length-1-i; j++)
                     {
@@ -124,6 +124,7 @@ namespace Lab_7
             public override void PlayMatch(int falls)
             {
                 if (penalties == null) return;
+                if (falls < 0 || falls > 5) return;
                 int[] newPart = new int[penalties.Length + 1];
                 for (int i = 0; i < penalties.Length; i++)
                 {

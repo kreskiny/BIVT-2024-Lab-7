@@ -77,7 +77,7 @@ namespace Lab_7
             {
                 get
                 {
-                    if (marks == null || marks.Length == 0) return 0; 
+                    if (marks == null) return 0; 
 
                     int total = 0;
                     for (int i = 0; i <2; i++)
@@ -102,7 +102,7 @@ namespace Lab_7
             // Методы
             public void Jump(int[] result)
             {
-                if (result == null || result.Length == 0)
+                if (result == null || result.Length == 0 || marks == null)
                 {
                     return;
                 }
@@ -117,10 +117,7 @@ namespace Lab_7
                 {
                     scoresToTake = 5;
                 }
-                if (marks == null || marks.Length == 0)
-                {
-                    return;
-                }
+                
                 for (int i = 0; i < 2; i++)
                 {
                     bool isEmpty = true;
