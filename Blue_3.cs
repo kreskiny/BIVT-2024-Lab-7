@@ -35,7 +35,7 @@ namespace Lab_7
                 
                 get
                 {
-                    if (penalties == null || penalties.Length == 0) return 0;
+                    if (penalties == null) return 0;
                     int total = 0;
                     foreach (int time in penalties)
                     {
@@ -49,12 +49,17 @@ namespace Lab_7
             {
                 get 
                 {
-                    if (penalties == null || penalties.Length == 0) return false;
+                    if (penalties == null) return false;
+                    is_expelled = false;
                     for (int i = 0; i < penalties.Length; i++)
                     {
-                        if (penalties[i] == 10) return true;
+                        if (penalties[i] == 10)
+                        {
+                            is_expelled = true;
+                            return true;
+                        }
                     }
-                    return false;
+                    return is_expelled;
                 }
             }
             
@@ -123,15 +128,8 @@ namespace Lab_7
 
             public override void PlayMatch(int falls)
             {
-                if (penalties == null) return;
-                if (falls < 0 || falls > 5) return;
-                int[] newPart = new int[penalties.Length + 1];
-                for (int i = 0; i < penalties.Length; i++)
-                {
-                    newPart[i] = penalties[i];
-                }
-                newPart[penalties.Length] = falls;
-                penalties = newPart;
+                if (penalties == null || falls < 0 || falls > 5) return;
+                base.PlayMatch(falls);
             }
 
             public override bool IsExpelled
@@ -170,21 +168,16 @@ namespace Lab_7
 
             public override void PlayMatch(int falls)
             {
-                if (penalties==null) return;
-                int[] newPart = new int[penalties.Length + 1];
-                for (int i = 0; i < penalties.Length; i++)
-                {
-                    newPart[i] = penalties[i];
-                }
-                newPart[penalties.Length] = falls;
-                penalties = newPart;
+                if (falls < 0 || falls > 5) return;
+                base.PlayMatch(falls);
+                totalPenaltyTime += falls;
             }
 
             public override bool IsExpelled 
             {
                 get
                 {
-                    if (penalties == null || penalties.Length == 0) return false;
+                    if (penalties == null) return false;
                     int sm = 0;
 
                     for (int i = 0; i < penalties.Length; i++)

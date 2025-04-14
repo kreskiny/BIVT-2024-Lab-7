@@ -222,13 +222,13 @@ namespace Lab_7
                     double firstPlacePrize = Bank * 0.4;
                     double secondPlacePrize = Bank * 0.25;
                     double thirdPlacePrize = Bank * 0.15;
-                    double othersPlacePrise = Bank * 20 / topParc / 100;
-                    prizes[0] = firstPlacePrize;
-                    prizes[1] = secondPlacePrize;
-                    prizes[2] = thirdPlacePrize;
-                    for (int i = 0; i < prizes.Length-3; i++)
+                    int othersPlacePrise = Bank * 20 / topParc / 100;
+                    prizes[0] = Bank * 0.4;
+                    prizes[1] = Bank * 0.25;
+                    prizes[2] = Bank * 0.15;
+                    for (int i = 3; i < prizes.Length; i++)
                     {
-                        prizes[i] = othersPlacePrise;
+                        prizes[i] = Bank * 20 / topParc / 100;
                     }
                     return prizes;
                 }
