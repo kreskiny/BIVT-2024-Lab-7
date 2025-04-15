@@ -178,17 +178,16 @@ namespace Lab_7
                 get
                 {
                     if (penalties == null) return false;
-                    int sm = 0;
-
-                    for (int i = 0; i < penalties.Length; i++)
+                    int sm = penalties.Sum();
+                    for(int i=0; i < penalties.Length; i++)
                     {
-                        sm += penalties[i];
-                        if (penalties[i] >= 10) 
-                        { 
-                            is_expelled = true; 
-                            return true; 
+                        if (penalties[i] == 10)
+                        {
+                            is_expelled |= true;
+                            return true;
                         }
                     }
+                    
                     if (sm > 0.1 * totalPenaltyTime / matchCount) return true;
 
                     return false;
