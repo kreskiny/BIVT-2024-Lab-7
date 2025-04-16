@@ -203,25 +203,18 @@ namespace Lab_7
                 get
                 {
                     if (Participants == null) return null;
-                    if (Participants.Count() < 3) return null;
+                    if (Participants.Length < 3) return null;
                     int topParc = Participants.Length / 2;
-                    double[] prizes = null;
-                    if (topParc <= 3)
+                    if (topParc > 10)
                     {
-                        prizes = new double[3];
+                        topParc = 10;
                     }
-                    else if (topParc <= 10)
-                    {
-                        prizes = new double[topParc];
-                    }
-                    else
-                    {
-                        prizes = new double[10];
-                    }
-                    double othersPlacePrise = Bank * 20.0 / topParc / 100;
-                    prizes[0] = Bank * 0.4;
-                    prizes[1] = Bank * 0.25;
-                    prizes[2] = Bank * 0.15;
+
+                    double[] prizes = new double[topParc];
+                    double othersPlacePrise = Bank * 0.2 / topParc;
+                    prizes[0] = Bank * 0.4 + othersPlacePrise;
+                    prizes[1] = Bank * 0.25 + othersPlacePrise;
+                    prizes[2] = Bank * 0.15 + othersPlacePrise;
                     for (int i = 3; i < prizes.Length; i++)
                     {
                         prizes[i] = othersPlacePrise;

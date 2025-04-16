@@ -181,9 +181,9 @@ namespace Lab_7
                     int sm = penalties.Sum();
                     for(int i=0; i < penalties.Length; i++)
                     {
-                        if (penalties[i] == 10)
+                        if (penalties[i] >= 10)
                         {
-                            is_expelled |= true;
+                            is_expelled = true;
                             return true;
                         }
                     }
