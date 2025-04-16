@@ -163,12 +163,12 @@ namespace Lab_7
             public HockeyPlayer(string name, string surname) : base(name, surname)
             {
                 totalPenaltyTime = 0;
-                matchCount = 0;
+                penalties = new int[0];
             }
 
             public override void PlayMatch(int falls)
             {
-                if (falls < 0 || falls > 5) return;
+                if (falls < 0 || penalties==null) return;
                 base.PlayMatch(falls);
                 totalPenaltyTime += falls;
             }
@@ -178,7 +178,6 @@ namespace Lab_7
                 get
                 {
                     if (penalties == null) return false;
-                    int sm = penalties.Sum();
                     for(int i=0; i < penalties.Length; i++)
                     {
                         if (penalties[i] >= 10)
@@ -188,7 +187,7 @@ namespace Lab_7
                         }
                     }
                     
-                    if (sm > 0.1 * totalPenaltyTime / matchCount) return true;
+                    if (Total > 0.1 * totalPenaltyTime / matchCount) return true;
 
                     return false;
                 }
