@@ -157,8 +157,8 @@ namespace Lab_7
         }
         public class HockeyPlayer : Participant
         {
-            private int totalPenaltyTime;
-            private int matchCount;
+            private static int totalPenaltyTime;
+            private static int matchCount;
 
             public HockeyPlayer(string name, string surname) : base(name, surname)
             {
@@ -168,31 +168,38 @@ namespace Lab_7
 
             public override void PlayMatch(int falls)
             {
-                if (falls < 0 || penalties==null) return;
+                if (falls < 0 || penalties == null) return;
                 base.PlayMatch(falls);
                 totalPenaltyTime += falls;
+                matchCount++;
             }
 
-            public override bool IsExpelled 
+
+            public override bool IsExpelled
             {
                 get
                 {
                     if (penalties == null) return false;
-                    for(int i=0; i < penalties.Length; i++)
+
+                    for (int i = 0; i < penalties.Length; i++)
                     {
                         if (penalties[i] >= 10)
                         {
-                            is_expelled = true;
                             return true;
                         }
                     }
-                    
-                    if (Total > 0.1 * totalPenaltyTime / matchCount) return true;
+
+                    if (matchCount == 0) return false;
+
+                    if (Total > 0.1 * totalPenaltyTime / matchCount)
+                    {
+                        return true;
+                    }
 
                     return false;
                 }
-            
             }
+
         }
     }
 }
