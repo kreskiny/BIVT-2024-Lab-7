@@ -159,11 +159,12 @@ namespace Lab_7
         {
             private static int totalPenaltyTime;
             private static int matchCount;
+            private static int playerCount; // добавлено
 
             public HockeyPlayer(string name, string surname) : base(name, surname)
             {
-                totalPenaltyTime = 0;
                 penalties = new int[0];
+                playerCount++; // добавлено
             }
 
             public override void PlayMatch(int falls)
@@ -173,7 +174,6 @@ namespace Lab_7
                 totalPenaltyTime += falls;
                 matchCount++;
             }
-
 
             public override bool IsExpelled
             {
@@ -189,9 +189,9 @@ namespace Lab_7
                         }
                     }
 
-                    if (matchCount == 0) return false;
+                    if (playerCount == 0) return false;
 
-                    if (Total > 0.1 * totalPenaltyTime / matchCount)
+                    if (Total > 0.1 * totalPenaltyTime / playerCount) // исправлено
                     {
                         return true;
                     }
@@ -199,7 +199,7 @@ namespace Lab_7
                     return false;
                 }
             }
-
         }
+
     }
 }
